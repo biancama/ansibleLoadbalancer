@@ -1,0 +1,20 @@
+---
+# Variables listed here 
+
+loadmaster: {ipAddress: '80.246.178.150', username: 'XXXX', password: 'XXXX'}
+
+test: &testid
+  - {ip: '10.2.0.150', port: '80'}
+  - {ip: '10.2.0.150', port: '443'}
+
+test2: &test2id
+  - {ip: '10.2.0.150', port: '80'}
+  - {ip: '10.2.0.150', port: '443'}
+
+
+all_servers: 
+  - *testid
+  - *test2id
+
+
+

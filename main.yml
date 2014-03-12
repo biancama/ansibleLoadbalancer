@@ -1,0 +1,13 @@
+---
+# This playbook enable and disable virtual server on load balancer 
+- name: 
+  hosts: all
+  vars_files: 
+    - "group_vars/local" 
+
+  roles: 
+    - setup
+    - disable
+    - enable
+    - clean  
+

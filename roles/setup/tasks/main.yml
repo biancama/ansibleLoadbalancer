@@ -1,0 +1,5 @@
+---
+# This playbook set up the laod master environment
+
+- include: create_tmp.yml
+- include: gather_info.yml

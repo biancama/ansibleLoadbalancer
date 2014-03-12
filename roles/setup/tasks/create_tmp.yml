@@ -1,0 +1,7 @@
+---
+# This playbook create tmp dir
+   
+- name: Create a local tmp folder and it stored in a gloabal variable
+  local_action: command mktemp -d
+  register: local_tempdir
+

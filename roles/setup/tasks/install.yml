@@ -1,0 +1,13 @@
+---
+# This playbook install python libraries
+   
+- name: Install python-lxml (Debian based)
+  sudo: True
+  local_action: apt pkg=python-lxml state=installed update_cache=true
+  only_if: "'$ansible_pkg_mgr' == 'apt'"
+
+
+- name: Install python-lxml (Debian based)
+  sudo: True
+  local_action: yum name=python-lxml state=present
+  only_if: "'$ansible_pkg_mgr' == 'yum'"

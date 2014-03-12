@@ -1,0 +1,26 @@
+---
+# This playbook fetch info of real server
+   
+- name: get real server address with xml content
+  local_action: uri url=https://{{ loadmaster.ipAddress}}/access/showvs?vs={{ item.ip }}&port={{ item.port }}&prot=tcp return_content=yes user={{ loadmaster.username}} password={{ loadmaster.password}}
+  register: virtual_servers
+  with_items: all_servers
+
+#- debug: msg="https://{{ loadmaster.username}}:{{ loadmaster.password}}@{{ loadmaster.ipAddress}}/access/showvs?vs={{ item.ip }}&port={{ item.port }}&prot=tcp return_content=yes"
+
+- name: extract real server address in xml content
+  local_action: shell echo "{{ item.content | parse_xml }}" >> {{ local_tempdir.stdout }}/real-servers.txt
+  #local_action: shell echo "{{ item.content | parse_xml }}" >> /tmp/real-servers.txt
+  with_items: virtual_servers.results
+  
+#- debug: msg="{{ item.content }}"
+  
+- name: fetch reals servers
+  #local_action: shell cat /tmp/real-servers.txt
+  local_action: shell cat {{ local_tempdir.stdout }}/real-servers.txt
+  register: real_servers
+
+- name: Do something with each result
+  debug: msg="pippo{{ item }}"
+  with_items: real_servers.stdout_lines
+

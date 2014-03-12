@@ -1,0 +1,8 @@
+---
+# This playbook disable real servers
+
+- name: disable real server 
+  #local_action: https://<LoadMasterIPAddress>/access/disablers?rs=<IP-addr>
+  local_action: uri url=https://{{ loadmaster.ipAddress}}/access/disablers?rs={{ item }}  user={{ loadmaster.username}} password={{ loadmaster.password}}
+  with_items: real_servers.stdout_lines
+

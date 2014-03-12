@@ -1,0 +1,7 @@
+---
+# This playbook delete temporary folder used for deploy
+- name: delete local temporary folder
+  local_action: command rm -rf {{ local_tempdir.stdout }}
+
+
+

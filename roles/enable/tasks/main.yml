@@ -1,0 +1,5 @@
+---
+# This playbook disables all real server  
+
+- include: enableRealServer.yml
+
